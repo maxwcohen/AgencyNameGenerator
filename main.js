@@ -17,7 +17,7 @@ var noun = [
   "Rabbit",
   "Bear",
   "Kid",
-  "Captain",
+  "Captian",
   "Red",
   "Topic",
   "Wish",
@@ -27,7 +27,8 @@ var noun = [
   "Bastard",
   "Box"
 ];
-function changeStyle(){
+
+function getStyle(){
   var styleNum = Math.floor(Math.random()*18+1);
 
   $("#name").removeClass();
@@ -100,10 +101,51 @@ function getName(){
   }
 }
 
+var styleLock = false;
+var nameLock = false;
+
+function toggleStyleLock(){
+  if(styleLock == false){
+    $("#styleLock").addClass("fullOpacity");
+    styleLock = true;
+    return;
+  }
+  if(styleLock == true){
+    $("#styleLock").removeClass("fullOpacity");
+    styleLock = false;
+    return;
+  }
+}
+
+function toggleNameLock(){
+  if(nameLock == false){
+    $("#nameLock").addClass("fullOpacity");
+    nameLock = true;
+    return;
+  }
+  if(nameLock == true){
+    $("#nameLock").removeClass("fullOpacity");
+    nameLock = false;
+    return;
+  }
+}
+
+$("#styleLock").click(toggleStyleLock);
+$("#nameLock").click(toggleNameLock);
+
 function generate(){
-  $("#name").html("");
-  changeStyle();
-  getName();
+  if(styleLock == true && nameLock == false){
+    $("#name").html("");
+    getName();
+  }
+  if(nameLock == true && styleLock == false){
+    getStyle();
+  }
+  if(nameLock == false && styleLock == false){
+    $("#name").html("");
+    getStyle();
+    getName();
+  }
 }
 
 $("#button").click(generate);
