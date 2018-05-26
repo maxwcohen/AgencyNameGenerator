@@ -76,7 +76,7 @@ body{
 .style2{
   font-family: "neplus";
   text-transform: uppercase;
-/*   font-size: calc(50px + 3vw); */
+  /* font-size: calc(50px + 3vw); */
 }
 @keyframes driftApart {
   0%{
@@ -90,10 +90,10 @@ body{
   font-family: "balboa-plus-inline";
   color: white;
   letter-spacing: 20px;
-  text-shadow: 0px 0px 15px white;
-  animation-name: driftApart;
+  text-shadow: 0px 0px 10px white;
+  /* animation-name: driftApart;
   animation-duration: 2s;
-  animation-timing-function: ease-out;
+  animation-timing-function: ease-out; */
 }
 .style4{
   font-family: "madrone-std";
@@ -123,8 +123,10 @@ body{
   letter-spacing: 10px;
   color: rgb(100,143,119);
   background-color: rgb(250, 212, 147);
-
-  padding: 15px 25px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 2vw;
+  padding-right: 2vw;
   box-shadow: 0px 5px rgb(202, 116, 114);
 }
 .style9{
@@ -251,8 +253,8 @@ body{
   background-color: #F34213;
 }
 
-/* @media (max-width: 500px){ */
-  /* .header{
+/* @media (max-width: 500px){
+  .header{
     height: 85px;
     line-height: 42px;
   }
