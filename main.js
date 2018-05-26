@@ -17,7 +17,7 @@ var noun = [
   "Rabbit",
   "Bear",
   "Kid",
-  "Caftan",
+  "Captain",
   "Red",
   "Topic",
   "Wish",
