@@ -42,7 +42,7 @@ body{
   left: 50%;
   transform: translate(-50%, -60%);
   text-align: center;
-  font-size: calc(60px + 3vw);
+  font-size: calc(50px + 3vw);
 }
 @keyframes blink {
   0%{
@@ -76,7 +76,7 @@ body{
 .style2{
   font-family: "neplus";
   text-transform: uppercase;
-  font-size: calc(50px + 3vw);
+/*   font-size: calc(50px + 3vw); */
 }
 @keyframes driftApart {
   0%{
