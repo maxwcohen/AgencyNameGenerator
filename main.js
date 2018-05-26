@@ -4,12 +4,28 @@ var letter = [
 
 var adjective = [
   "Yellow",
-  "Meaty"
+  "Meaty",
+  "Windy",
+  "Sticky",
+  "Super",
+  "Hot",
+  "Blonde",
+  "Crispy"
 ];
 
 var noun = [
   "Rabbit",
-  "Bear"
+  "Bear",
+  "Kid",
+  "Caftan",
+  "Red",
+  "Topic",
+  "Wish",
+  "Bloom",
+  "Stuff",
+  "Detention",
+  "Bastard",
+  "Box"
 ];
 function changeStyle(){
   var styleNum = Math.floor(Math.random()*18+1);
