@@ -3,14 +3,14 @@ body{
 }
 .header{
   font-family: 'Abril Fatface', cursive;
-  font-size: 30pt;
+  font-size: calc(8pt + 2vw);
   text-align: center;
   background-color: rgba(22,22,22,.2);
   color: #FFFFFF;
   padding: 5px 0px;
   position: fixed;
   width: 100%;
-  height: 65px;
+  height: calc(vw/5);
 }
 
 #button{
@@ -33,7 +33,7 @@ body{
 
 #siteBackground{
   width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 
 .nameContainer{
@@ -42,7 +42,7 @@ body{
   left: 50%;
   transform: translate(-50%, -60%);
   text-align: center;
-  font-size: 80pt;
+  font-size: calc(60px + 3vw);
 }
 @keyframes blink {
   0%{
@@ -65,10 +65,6 @@ body{
 
 .introBackground{
   background-color: rgb(100,200,255);
-}
-
-.hidden{
-  display: none;
 }
 
 /* NAME STYLES */
@@ -105,7 +101,7 @@ body{
 .style5{
   font-family: "sutturah";
   color: #F092DD;
-  font-size: 100pt;
+  /* font-size: 100pt; */
   text-shadow: 3px 3px #392F5A;
 }
 .style6{
@@ -144,7 +140,7 @@ body{
   font-family: Garamond;
   font-weight: bold;
   text-transform: lowercase;
-  font-size: 60px;
+  font-size: calc(30px + 3vw);
   color: #222222;
 }
 .style11:after{
@@ -223,7 +219,7 @@ body{
   rgb(255, 60, 20) 50px,
   black 50px,
   black 100px
-);
+  );
 }
 .background10{
   background-color: #EE5622;
@@ -253,8 +249,8 @@ body{
   background-color: #F34213;
 }
 
-@media (max-width: 500px){
-  .header{
+/* @media (max-width: 500px){ */
+  /* .header{
     height: 85px;
     line-height: 42px;
   }
@@ -270,4 +266,4 @@ body{
   .style11:after{
     margin-left: -5px;
   }
-}
+} */
