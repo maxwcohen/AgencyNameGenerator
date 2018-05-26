@@ -97,6 +97,7 @@ body{
 .style4{
   font-family: "madrone-std";
   color: rgb(253,205,40);
+  font-size: calc(35px + 3vw);
 }
 .style5{
   font-family: "sutturah";
