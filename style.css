@@ -31,7 +31,7 @@ body{
   padding-top: 5px;
 }
 
-.lockContainer{
+.optionsContainer{
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -39,24 +39,21 @@ body{
   right: 1%;
 }
 
-.lock{
+.option{
   width:20px;
-  transform: translateX(50%);
+  /* transform: translateX(100%); */
+  margin-left: 40%;
 }
 
-.lockLabel{
+.optionLabel{
   margin-top: 5px;
   text-align: center;
   font-family: "industry-inc-3d";
   color: grey;
 }
 
-.styleLockContainer{
-  margin: 0px 15px;
-}
-
-.nameLockContainer{
-  margin: 0px 15px;
+.optionContainer{
+  margin: 5px 15px;
 }
 
 img{

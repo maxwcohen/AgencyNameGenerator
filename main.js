@@ -5,12 +5,13 @@ var letter = [
 var adjective = [
   "Yellow",
   "Meaty",
-  "Windy",
   "Sticky",
   "Super",
   "Hot",
   "Blonde",
-  "Crispy"
+  "Crispy",
+  "Banana",
+  "Mama"
 ];
 
 var noun = [
@@ -25,7 +26,8 @@ var noun = [
   "Stuff",
   "Detention",
   "Bastard",
-  "Box"
+  "Box",
+  "Momma"
 ];
 
 function getStyle(){
@@ -35,8 +37,6 @@ function getStyle(){
   $("#siteBackground").removeClass();
   $("#name").addClass("style"+styleNum);
   $("#siteBackground").addClass("background"+styleNum);
-
-  console.log(styleNum);
 }
 
 function getLetter(){
@@ -134,18 +134,89 @@ $("#styleLock").click(toggleStyleLock);
 $("#nameLock").click(toggleNameLock);
 
 function generate(){
-  if(styleLock == true && nameLock == false){
-    $("#name").html("");
-    getName();
-  }
-  if(nameLock == true && styleLock == false){
+  // Record previous content for undo
+  window.lastStyle = document.getElementById("name").className;
+  window.lastBackground = document.getElementById("siteBackground").className;
+  window.lastName = document.getElementById("name").innerHTML;
+  $("#undoLabel").css("text-decoration", "");
+
+  if(styleLock == false){
     getStyle();
   }
-  if(nameLock == false && styleLock == false){
+  if(nameLock == false){
     $("#name").html("");
-    getStyle();
     getName();
   }
 }
 
+var undoStatus = false;
+
+function undo(){
+  if(lastStyle){
+    if(styleLock == false){
+      window.redoStyle = document.getElementById("name").className;
+      window.redoBackground = document.getElementById("siteBackground").className;
+      $("#name").removeClass();
+      $("#siteBackground").removeClass();
+      $("#name").addClass(lastStyle);
+      $("#siteBackground").addClass(lastBackground);
+    }
+    if(nameLock == false){
+      window.redoName = document.getElementById("name").innerHTML;
+      $("#name").html(lastName);
+    }
+
+    $("#undo").css("transform", "scaleX(-1)");
+    $("#undoLabel").html("(R)edo");
+
+    undoStatus = true;
+  }
+}
+
+function redo(){
+  if(redoStyle){
+    $("#name").removeClass();
+    $("#siteBackground").removeClass();
+    $("#name").addClass(redoStyle);
+    $("#siteBackground").addClass(redoBackground);
+  }
+  if(redoName){
+    $("#name").html(redoName);
+  }
+
+  $("#undo").css("transform", "");
+  $("#undoLabel").html("(U)ndo");
+
+  undoStatus = false;
+}
+
+function undoOrRedo(){
+  if(undoStatus == false){
+    undo();
+  }
+  else{
+    redo();
+  }
+}
+
+$("#undo").click(undoOrRedo);
+
 $("#button").click(generate);
+
+$(document).keyup(function(e){
+  if(e.keyCode == 32){
+    generate();
+  }
+  if(e.keyCode == 85){
+    undoOrRedo();
+  }
+  if(e.keyCode == 83){
+    toggleStyleLock();
+  }
+  if(e.keyCode == 78){
+    toggleNameLock();
+  }
+  if(e.keyCode == 82){
+    redo();
+  }
+})
