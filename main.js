@@ -133,12 +133,17 @@ function toggleNameLock(){
 $("#styleLock").click(toggleStyleLock);
 $("#nameLock").click(toggleNameLock);
 
+var undoStatus = false;
+
 function generate(){
-  // Record previous content for undo
+  // Record previous content for undo & reset undo
   window.lastStyle = document.getElementById("name").className;
   window.lastBackground = document.getElementById("siteBackground").className;
   window.lastName = document.getElementById("name").innerHTML;
-  $("#undoLabel").css("text-decoration", "");
+  $("#undo").css("transform", "");
+  $("#undoLabel").html("(U)ndo");
+  undoStatus = false;
+
 
   if(styleLock == false){
     getStyle();
@@ -148,8 +153,6 @@ function generate(){
     getName();
   }
 }
-
-var undoStatus = false;
 
 function undo(){
   if(lastStyle){
