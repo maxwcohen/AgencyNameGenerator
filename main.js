@@ -178,19 +178,21 @@ function undo(){
 
 function redo(){
   if(redoStyle){
-    $("#name").removeClass();
-    $("#siteBackground").removeClass();
-    $("#name").addClass(redoStyle);
-    $("#siteBackground").addClass(redoBackground);
-  }
-  if(redoName){
-    $("#name").html(redoName);
-  }
+    if(styleLock == false){
+      $("#name").removeClass();
+      $("#siteBackground").removeClass();
+      $("#name").addClass(redoStyle);
+      $("#siteBackground").addClass(redoBackground);
+    }
+    if(nameLock == false){
+      $("#name").html(redoName);
+    }
 
-  $("#undo").css("transform", "");
-  $("#undoLabel").html("(U)ndo");
+    $("#undo").css("transform", "");
+    $("#undoLabel").html("(U)ndo");
 
-  undoStatus = false;
+    undoStatus = false;
+  }
 }
 
 function undoOrRedo(){
@@ -203,6 +205,14 @@ function undoOrRedo(){
 }
 
 $("#undo").click(undoOrRedo);
+
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+$("#mobileClicker").click(function(){
+  if(isMobile){
+    generate();
+  }
+});
 
 $("#button").click(generate);
 
