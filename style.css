@@ -246,7 +246,7 @@ img{
   -webkit-text-fill-color: transparent;
 }
 .style19{ /*AKA, the Mac*/
-  font-family: Orator STD;
+  font-family: "orator-std";
   text-transform: uppercase;
 }
 .style19:before{
