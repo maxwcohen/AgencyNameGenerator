@@ -153,8 +153,8 @@ function generate(){
   undoStatus = false;
 
   //Delete Old canvas
-  if($("canvas")){
-    $("#canvas").remove();
+  if(lastStyle || lastName){
+    $("canvas").remove();
   }
 
   if(styleLock == false){
@@ -234,7 +234,7 @@ function downloadImage(){
   canvasToImage("canvas");
 }
 
-// $("#styleLock").click(downloadImage);
+$("#download").click(downloadImage);
 
 $(document).keyup(function(e){
   if(e.keyCode == 32){
