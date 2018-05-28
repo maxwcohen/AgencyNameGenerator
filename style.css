@@ -44,7 +44,7 @@ body{
 }
 
 #mobileClicker{
-  width: calc(100vw - 90px - 1%);
+  width: 100vw;
   height: 200px;
   position: fixed;
   bottom: 0%;
