@@ -31,7 +31,7 @@ var noun = [
 ];
 
 function getStyle(){
-  var styleNum = Math.floor(Math.random()*18+1);
+  var styleNum = Math.floor(Math.random()*19+1);
 
   $("#name").removeClass();
   $("#siteBackground").removeClass();
@@ -75,7 +75,7 @@ function getAdjective(){
 function getNoun(){
   var nounIndex = Math.floor(Math.random()*noun.length);
   var nounValue = noun[nounIndex];
-  $("#name").append(" " + nounValue);
+  $("#name").append(nounValue);
 }
 
 function getWords(){
@@ -88,6 +88,7 @@ function getWords(){
   }
   if(threeSidedCoin >= .33 && threeSidedCoin <= .67){
     getAdjective();
+    $("#name").append(" ");
     getNoun();
   }
 }
@@ -99,6 +100,13 @@ function getName(){
   else{
     getWords();
   }
+}
+
+function getCanvas(){
+  html2canvas(document.getElementById("siteBackground")).then(function(canvas) {
+      document.body.appendChild(canvas);
+      document.getElementsByTagName("canvas")[0].setAttribute("id", "canvas");
+  });
 }
 
 var styleLock = false;
@@ -144,6 +152,10 @@ function generate(){
   $("#undoLabel").html("(U)ndo");
   undoStatus = false;
 
+  //Delete Old canvas
+  if($("canvas")){
+    $("#canvas").remove();
+  }
 
   if(styleLock == false){
     getStyle();
@@ -152,6 +164,8 @@ function generate(){
     $("#name").html("");
     getName();
   }
+
+  getCanvas();
 }
 
 function undo(){
@@ -177,7 +191,7 @@ function undo(){
 }
 
 function redo(){
-  if(redoStyle){
+  if(redoStyle || redoName){
     if(styleLock == false){
       $("#name").removeClass();
       $("#siteBackground").removeClass();
@@ -216,6 +230,12 @@ $("#mobileClicker").click(function(){
 
 $("#button").click(generate);
 
+function downloadImage(){
+  canvasToImage("canvas");
+}
+
+// $("#styleLock").click(downloadImage);
+
 $(document).keyup(function(e){
   if(e.keyCode == 32){
     generate();
@@ -231,5 +251,8 @@ $(document).keyup(function(e){
   }
   if(e.keyCode == 82){
     redo();
+  }
+  if(e.keyCode == 68){
+    downloadImage();
   }
 })

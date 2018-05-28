@@ -13,6 +13,9 @@ body{
   height: calc(vw/5);
 }
 
+canvas{
+  display: none;
+}
 .me{
   font-family: "franklin-gothic-urw";
   font-weight: 500;
@@ -242,6 +245,16 @@ img{
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.style19{ /*AKA, the Mac*/
+  font-family: Orator STD;
+  text-transform: uppercase;
+}
+.style19:before{
+  content:"-";
+}
+.style19:after{
+  content:"-";
+}
 /* BACKGROUNDS */
 
 .background1{
@@ -303,6 +316,10 @@ img{
 }
 .background18{
   background-color: #F34213;
+}
+
+.background19{
+  background-color: rgb(255,253,56)
 }
 
 @media (min-width: 800px){
