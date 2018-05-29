@@ -247,7 +247,7 @@ img{
 }
 .style19{ /*AKA, the Mac*/
   font-family: "orator-std";
-  text-transform: uppercase;
+  text-transform: lowercase;
 }
 .style19:before{
   content:"-";

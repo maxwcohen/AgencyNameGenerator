@@ -210,11 +210,14 @@ function redo(){
 }
 
 function undoOrRedo(){
+  $("canvas").remove();
   if(undoStatus == false){
     undo();
+    getCanvas();
   }
   else{
     redo();
+    getCanvas();
   }
 }
 
