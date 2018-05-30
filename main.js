@@ -27,7 +27,8 @@ var noun = [
   "Detention",
   "Bastard",
   "Box",
-  "Momma"
+  "Momma",
+  "Ball"
 ];
 
 function getStyle(){
