@@ -16,6 +16,7 @@ body{
 canvas{
   display: none;
 }
+
 .me{
   font-family: "franklin-gothic-urw";
   font-weight: 500;
@@ -48,10 +49,29 @@ canvas{
 
 #mobileClicker{
   width: 100vw;
-  height: 200px;
+  height: 100vh;
   position: fixed;
   bottom: 0%;
   left:0%;
+}
+
+input{
+  background-color: rgba(0,0,0,0);
+
+}
+#customType{
+  font-size: calc(50px + 3vw);
+  border: none;
+  text-align: center;
+  line-height: inherit;
+
+}
+#customType:focus{
+  outline: none;
+}
+
+.hidden{
+  display: none;
 }
 
 .optionsContainer{
@@ -100,6 +120,7 @@ img{
   text-align: center;
   font-size: calc(50px + 3vw);
 }
+
 @keyframes blink {
   0%{
     opacity: 1;
@@ -113,6 +134,7 @@ img{
 }
 .intro{
   font-family: 'industry-inc-3d';
+  line-height: calc(50px + 3vw);;
   animation-name: blink;
   animation-duration: 2s;
   animation-iteration-count: infinite;
