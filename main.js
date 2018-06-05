@@ -11,7 +11,20 @@ var adjective = [
   "Blonde",
   "Crispy",
   "Banana",
-  "Mama"
+  "Mama",
+  "The",
+  "A",
+  "Folding",
+  "Young",
+  "Molecular",
+  "Deep",
+  "Daily",
+  "Proud",
+  "Mighty",
+  "Big",
+  "Fat",
+  "Rough",
+  "Vanilla"
 ];
 
 var noun = [
@@ -28,7 +41,21 @@ var noun = [
   "Bastard",
   "Box",
   "Momma",
-  "Ball"
+  "Ball",
+  "Berry",
+  "Nine",
+  "Battleship",
+  "Bicycle",
+  "Chance",
+  "Divide",
+  "Sunday",
+  "Passion",
+  "Biplane",
+  "Loft",
+  "Wax",
+  "Thanks",
+  "Luck",
+  "Stepmother"
 ];
 
 function getStyle(){
