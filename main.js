@@ -341,7 +341,7 @@ $(document).keyup(function(e){
 
 //Get elements from URL
 var urlParts = window.location.search.split("?")[1];
-var nameForURL = urlParts.split("=")[0].replace("%20"," ");
+var nameForURL = urlParts.split("=")[0].replace("%20"," ").replace("%20"," ");
 var styleForURL = urlParts.split("=")[1];
 $("#name").removeClass();
 $("#siteBackground").removeClass();
