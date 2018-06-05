@@ -58,15 +58,6 @@ var noun = [
   "Stepmother"
 ];
 
-var urlParts = window.location.search.split("?")[1];
-var nameForURL = urlParts.split("=")[0].replace("%20"," ");
-var styleForURL = urlParts.split("=")[1];
-$("#name").removeClass();
-$("#siteBackground").removeClass();
-$("#name").addClass("style"+styleForURL);
-$("#siteBackground").addClass("background"+styleForURL);
-$("#name").html(nameForURL);
-
 function getCustomTypeStyle(){
   var styleNum = Math.floor(Math.random()*19+1);
 
@@ -224,8 +215,6 @@ function generate(){
   }
 
   window.history.replaceState({}, "", "?" + currentName + "=" + styleNum);
-  console.log(nameForURL);
-  console.log(styleForURL);
 }
 
 function undo(){
@@ -329,7 +318,6 @@ $("#download").click(downloadImage);
 //   }
 // })
 
-
 $(document).keyup(function(e){
   if(e.keyCode == 32){
     generate();
@@ -350,3 +338,12 @@ $(document).keyup(function(e){
     downloadImage();
   }
 })
+
+var urlParts = window.location.search.split("?")[1];
+var nameForURL = urlParts.split("=")[0].replace("%20"," ");
+var styleForURL = urlParts.split("=")[1];
+$("#name").removeClass();
+$("#siteBackground").removeClass();
+$("#name").addClass("style"+styleForURL);
+$("#siteBackground").addClass("background"+styleForURL);
+$("#name").html(nameForURL);
