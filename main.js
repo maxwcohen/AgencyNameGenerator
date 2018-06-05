@@ -58,6 +58,15 @@ var noun = [
   "Stepmother"
 ];
 
+var urlParts = window.location.search.split("?")[1];
+var nameForURL = urlParts.split("=")[0].replace("%20"," ");
+var styleForURL = urlParts.split("=")[1];
+$("#name").removeClass();
+$("#siteBackground").removeClass();
+$("#name").addClass("style"+styleForURL);
+$("#siteBackground").addClass("background"+styleForURL);
+$("#name").html(nameForURL);
+
 function getCustomTypeStyle(){
   var styleNum = Math.floor(Math.random()*19+1);
 
@@ -68,7 +77,7 @@ function getCustomTypeStyle(){
 }
 
 function getStyle(){
-  var styleNum = Math.floor(Math.random()*19+1);
+  window.styleNum = Math.floor(Math.random()*19+1);
 
   $("#name").removeClass();
   $("#siteBackground").removeClass();
@@ -137,6 +146,7 @@ function getName(){
   else{
     getWords();
   }
+  window.currentName = document.getElementById("name").innerHTML;
 }
 
 function getCanvas(){
@@ -198,7 +208,7 @@ function generate(){
   if(styleLock == false && nameLock == true && isCustomType == true){
     getCustomTypeStyle();
     window.currentStyle = document.getElementById("name").className;
-    $("#name").addClass(currentStyle);
+    $("#name").addClass(tyle);
   }
 
   if(nameLock == false){
@@ -212,8 +222,10 @@ function generate(){
     $("#name").html("");
     getName();
   }
-  window.history.replaceState({}, "", "?" + currentStyle);
 
+  window.history.replaceState({}, "", "?" + currentName + "=" + styleNum);
+  console.log(nameForURL);
+  console.log(styleForURL);
 }
 
 function undo(){
