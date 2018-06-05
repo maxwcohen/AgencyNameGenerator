@@ -214,6 +214,7 @@ function generate(){
     getName();
   }
 
+  // Update URL
   window.history.replaceState({}, "", "?" + currentName + "=" + styleNum);
 }
 
@@ -339,6 +340,7 @@ $(document).keyup(function(e){
   }
 })
 
+//Get elements from URL
 var urlParts = window.location.search.split("?")[1];
 var nameForURL = urlParts.split("=")[0].replace("%20"," ");
 var styleForURL = urlParts.split("=")[1];
@@ -347,3 +349,4 @@ $("#siteBackground").removeClass();
 $("#name").addClass("style"+styleForURL);
 $("#siteBackground").addClass("background"+styleForURL);
 $("#name").html(nameForURL);
+window.location = window.location.pathname;
