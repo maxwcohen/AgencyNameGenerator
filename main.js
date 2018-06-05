@@ -212,7 +212,7 @@ function generate(){
     $("#name").html("");
     getName();
   }
-  // window.location.href = "http://www.AgencyNameGenerator.com/"currentStyle"";
+  window.history.replaceState({}, "", "?" + currentStyle);
 
 }
 
