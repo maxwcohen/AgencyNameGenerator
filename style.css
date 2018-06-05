@@ -47,14 +47,6 @@ canvas{
   padding-top: 5px;
 }
 
-#mobileClicker{
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  bottom: 0%;
-  left:0%;
-}
-
 input{
   background-color: rgba(0,0,0,0);
 
@@ -342,10 +334,4 @@ img{
 
 .background19{
   background-color: rgb(255,253,56)
-}
-
-@media (min-width: 800px){
-  #mobileClicker{
-    display:none;
-  }
 }

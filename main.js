@@ -212,6 +212,8 @@ function generate(){
     $("#name").html("");
     getName();
   }
+  // window.location.href = "http://www.AgencyNameGenerator.com/"currentStyle"";
+
 }
 
 function undo(){
@@ -274,10 +276,9 @@ var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 if(isMobile){
   $("#name").html("Tap Anywhere to Begin");
-  $("#name").click(generate);
 }
 
-$("#mobileClicker").click(function(){
+$("#siteBackground").click(function(){
   if(isMobile){
     generate();
   }
