@@ -238,6 +238,7 @@ function undo(){
 
     undoStatus = true;
   }
+  window.history.replaceState({}, "", "?" + currentName + "=" + styleNum);
 }
 
 function redo(){
@@ -257,17 +258,15 @@ function redo(){
 
     undoStatus = false;
   }
+  window.history.replaceState({}, "", "?" + currentName + "=" + styleNum);
 }
 
 function undoOrRedo(){
-  $("canvas").remove();
   if(undoStatus == false){
     undo();
-    getCanvas();
   }
   else{
     redo();
-    getCanvas();
   }
 }
 
@@ -349,4 +348,3 @@ $("#siteBackground").removeClass();
 $("#name").addClass("style"+styleForURL);
 $("#siteBackground").addClass("background"+styleForURL);
 $("#name").html(nameForURL);
-window.location = window.location.pathname;

@@ -11,6 +11,7 @@ body{
   position: fixed;
   width: 100%;
   height: calc(vw/5);
+  text-decoration: none;
 }
 
 canvas{
