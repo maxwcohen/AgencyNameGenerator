@@ -55,7 +55,7 @@ var noun = [
   "Wax",
   "Thanks",
   "Luck",
-  "Stepmother"
+  "Step<wbr>mother"
 ];
 
 function getCustomTypeStyle(){
@@ -340,8 +340,10 @@ $(document).keyup(function(e){
 })
 
 //Get elements from URL
+// const %3E = "<";
+// const %3C = ">";
 var urlParts = window.location.search.split("?")[1];
-var nameForURL = urlParts.split("=")[0].replace("%20"," ").replace("%20"," ");
+var nameForURL = decodeURIComponent(urlParts.split("=")[0]);
 var styleForURL = urlParts.split("=")[1];
 $("#name").removeClass();
 $("#siteBackground").removeClass();
