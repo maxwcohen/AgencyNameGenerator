@@ -137,7 +137,7 @@ function getName(){
   else{
     getWords();
   }
-  window.currentName = document.getElementById("name").innerHTML;
+
 }
 
 function getCanvas(){
@@ -215,6 +215,7 @@ function generate(){
   }
 
   // Update URL
+  window.currentName = document.getElementById("name").innerHTML;
   window.history.replaceState({}, "", "?" + currentName + "=" + styleNum);
 }
 
@@ -238,7 +239,7 @@ function undo(){
 
     undoStatus = true;
   }
-  window.history.replaceState({}, "", "?" + currentName + "=" + styleNum);
+  window.history.replaceState({}, "", "?" + lastName + "=" + lastStyle.replace("style",""));
 }
 
 function redo(){
@@ -258,7 +259,7 @@ function redo(){
 
     undoStatus = false;
   }
-  window.history.replaceState({}, "", "?" + currentName + "=" + styleNum);
+  window.history.replaceState({}, "", "?" + redoName + "=" + redoStyle.replace("style",""));
 }
 
 function undoOrRedo(){
@@ -308,13 +309,20 @@ function downloadImage(){
 
 $("#download").click(downloadImage);
 
+//Custom typing
 // $(document).keydown(function(e){
-//   console.log(e);
+//   // console.log(e);
 //   if(isCustomType == false){
 //     if(e.keyCode == 16||65||66||67||68||69||70||71||72||73||74||75||76||77||78||79||80||81||82||83||84||85||86||87||88||89||90){
 //       beginWriting();
 //       isCustomType = true;
 //     }
+//   }
+// })
+// $(document).keydown(function(e){
+//   if(e.keyCode == 16||65||66||67||68||69||70||71||72||73||74||75||76||77||78||79||80||81||82||83||84||85||86||87||88||89||90){
+//     var customName = document.getElementById("customType").value
+//     window.history.replaceState({}, "", "?" + customName + "=" + styleNum);
 //   }
 // })
 
@@ -334,14 +342,12 @@ $(document).keyup(function(e){
   if(e.keyCode == 82){
     redo();
   }
-  if(e.keyCode == 68){
-    downloadImage();
-  }
+  // if(e.keyCode == 68){
+  //   downloadImage();
+  // }
 })
 
 //Get elements from URL
-// const %3E = "<";
-// const %3C = ">";
 var urlParts = window.location.search.split("?")[1];
 var nameForURL = decodeURIComponent(urlParts.split("=")[0]);
 var styleForURL = urlParts.split("=")[1];
