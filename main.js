@@ -303,6 +303,7 @@ function beginWriting(){
 $("#button").click(generate);
 
 function downloadImage(){
+  window.clearInterval(countdownToFlash);
   //Delete Old canvas
   if(lastStyle || lastName){
     $("canvas").remove();
