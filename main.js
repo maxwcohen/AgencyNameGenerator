@@ -148,6 +148,12 @@ function getCanvas(){
     });
 }
 
+function addFlash(){
+  $(".optionsContainer").addClass("flash");
+}
+var countdownToFlash = window.setTimeout(addFlash, 12000);
+countdownToFlash;
+
 var styleLock = false;
 var nameLock = false;
 
@@ -155,26 +161,25 @@ function toggleStyleLock(){
   if(styleLock == false){
     $("#styleLock").addClass("fullOpacity");
     styleLock = true;
-    return;
   }
-  if(styleLock == true){
+  else{
     $("#styleLock").removeClass("fullOpacity");
     styleLock = false;
-    return;
   }
+  window.clearInterval(countdownToFlash);
 }
 
 function toggleNameLock(){
   if(nameLock == false){
     $("#nameLock").addClass("fullOpacity");
     nameLock = true;
-    return;
+
   }
-  if(nameLock == true){
+  else{
     $("#nameLock").removeClass("fullOpacity");
     nameLock = false;
-    return;
   }
+  window.clearInterval(countdownToFlash);
 }
 
 $("#styleLock").click(toggleStyleLock);
@@ -269,6 +274,7 @@ function undoOrRedo(){
   else{
     redo();
   }
+  window.clearInterval(countdownToFlash);
 }
 
 $("#undo").click(undoOrRedo);
