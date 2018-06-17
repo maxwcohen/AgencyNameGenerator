@@ -58,6 +58,8 @@ var noun = [
   "Step<wbr>mother"
 ];
 
+var bannedStyles = ["9", "18"];
+
 function getCustomTypeStyle(){
   var styleNum = Math.floor(Math.random()*19+1);
 
@@ -137,7 +139,9 @@ function getName(){
   else{
     getWords();
   }
-
+  //Remove quotes/make all one string
+  var nameB4 = document.getElementById("name").innerHTML;
+  $("#name").html(nameB4);
 }
 
 function getCanvas(){
@@ -148,6 +152,7 @@ function getCanvas(){
     });
 }
 
+//Flash options if they haven't been used
 function addFlash(){
   $(".optionsContainer").addClass("flash");
 }
@@ -243,8 +248,8 @@ function undo(){
     $("#undoLabel").html("(R)edo");
 
     undoStatus = true;
+    window.history.replaceState({}, "", "?" + lastName + "=" + lastStyle.replace("style",""));
   }
-  window.history.replaceState({}, "", "?" + lastName + "=" + lastStyle.replace("style",""));
 }
 
 function redo(){
@@ -279,13 +284,11 @@ function undoOrRedo(){
 
 $("#undo").click(undoOrRedo);
 
-//Mobile Clicking
+//Mobile Changes
 var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
 if(isMobile){
   $("#name").html("Tap Anywhere to Begin");
 }
-
 $("#siteBackground").click(function(){
   if(isMobile){
     generate();
@@ -304,14 +307,20 @@ $("#button").click(generate);
 
 function downloadImage(){
   window.clearInterval(countdownToFlash);
-  //Delete Old canvas
-  if(lastStyle || lastName){
+  var currentName = document.getElementById("name").innerHTML;
+  var currentStyleNum = document.getElementById("name").className.split("style")[1];
+  if(bannedStyles.includes(currentStyleNum) == false){
     $("canvas").remove();
+    getCanvas().then(function() {
+      var okToDownload = confirm("Download Image?");
+      if(okToDownload){
+        canvasToImage("canvas", currentName + currentStyleNum);
+      }
+    });
   }
-  getCanvas().then(function() {
-    console.log('ready to image it');
-    canvasToImage("canvas");
-  });
+  else{
+    alert("Sorry, this style cannot be downloaded.");
+  }
 }
 
 $("#download").click(downloadImage);
@@ -356,10 +365,10 @@ $(document).keyup(function(e){
 
 //Get elements from URL
 var urlParts = window.location.search.split("?")[1];
-var nameForURL = decodeURIComponent(urlParts.split("=")[0]);
-var styleForURL = urlParts.split("=")[1];
+var nameFromURL = decodeURIComponent(urlParts.split("=")[0]);
+var styleFromURL = urlParts.split("=")[1];
 $("#name").removeClass();
 $("#siteBackground").removeClass();
-$("#name").addClass("style"+styleForURL);
-$("#siteBackground").addClass("background"+styleForURL);
-$("#name").html(nameForURL);
+$("#name").addClass("style"+styleFromURL);
+$("#siteBackground").addClass("background"+styleFromURL);
+$("#name").html(nameFromURL);
