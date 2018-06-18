@@ -130,6 +130,9 @@ img{
   transform: translate(-50%, -60%);
   text-align: center;
   font-size: calc(50px + 3vw);
+  line-height: 1em;
+  width: 100vw;
+
 }
 
 @keyframes blink {
@@ -143,7 +146,7 @@ img{
     opacity: 1;
   }
 }
-.intro{
+.style0{
   font-family: 'industry-inc-3d';
   line-height: calc(50px + 3vw);;
   animation-name: blink;
@@ -152,7 +155,7 @@ img{
   animation-timing-function: step-end;
 }
 
-.introBackground{
+.background0{
   background-color: rgb(100,200,255);
 }
 
@@ -216,11 +219,13 @@ img{
   padding-left: 2vw;
   padding-right: 2vw;
   box-shadow: 0px 5px rgb(202, 116, 114);
+  display: inline-block;
 }
 .style9{
   font-family: "stenciletta-left";
   background-color: white;
   padding: 0px 50px;
+  display: inline-block;
 }
 .style10{
   font-family: "franklin-gothic-urw";
@@ -255,8 +260,8 @@ img{
   font-weight: Bold;
   font-size: 42pt;
   text-transform: uppercase;
-  text-shadow: 0px 42px, 0px -42px, 0px -82px, 0px -124px,
-    20px 82px,20px 124px, 20px 166px, 20px 208px;
+  text-shadow: 0px 42px, 0px -42px, 0px -84px, 0px -126px,
+    20px 84px,20px 126px, 20px 168px, 20px 210px;
 }
 .style15{
   font-family: 'industry-inc-3d';

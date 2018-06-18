@@ -58,24 +58,36 @@ var noun = [
   "Step<wbr>mother"
 ];
 
-var bannedStyles = ["9", "18"];
+var bannedStyles = [
+  "9", "18"];
 
-function getCustomTypeStyle(){
-  var styleNum = Math.floor(Math.random()*19+1);
 
-  $("#customType").removeClass();
+function replaceStyle(num){
+  num = num || styleNum;
+  $("#name").removeClass();
   $("#siteBackground").removeClass();
-  $("#customType").addClass("style"+styleNum);
-  $("#siteBackground").addClass("background"+styleNum);
+  $("#name").addClass("style" + num);
+  $("#siteBackground").addClass("background" + num);
+  styleNum = document.getElementById("name").className.split("style")[1]
+  console.log(styleNum);
+}
+
+function replaceName(name){
+  name = name || currentName;
+  $("#name").html(name);
+  currentName = document.getElementById("name").innerHTML;
+  console.log(currentName);
+}
+
+function updateURL(name, num){
+  name = name || currentName;
+  num = num || styleNum;
+  window.history.replaceState({}, "", "?" + name + "=" + num);
 }
 
 function getStyle(){
-  window.styleNum = Math.floor(Math.random()*19+1);
-
-  $("#name").removeClass();
-  $("#siteBackground").removeClass();
-  $("#name").addClass("style"+styleNum);
-  $("#siteBackground").addClass("background"+styleNum);
+  styleNum = Math.floor(Math.random()*19+1);
+  replaceStyle();
 }
 
 function getLetter(){
@@ -121,27 +133,31 @@ function getWords(){
   var threeSidedCoin = Math.random();
   if(threeSidedCoin > .67){
     getAdjective();
+    window.isTwoWords = false;
   }
   if(threeSidedCoin < .33){
     getNoun();
+    window.isTwoWords = false;
   }
   if(threeSidedCoin >= .33 && threeSidedCoin <= .67){
     getAdjective();
     $("#name").append(" ");
     getNoun();
+    window.isTwoWords = true;
   }
 }
 
 function getName(){
+  $("#name").html("");
   if(Math.random()>0.5){
     getAcronym();
   }
   else{
     getWords();
   }
-  //Remove quotes/make all one string
-  var nameB4 = document.getElementById("name").innerHTML;
-  $("#name").html(nameB4);
+  currentName = document.getElementById("name").innerHTML;
+  //Make all one string
+  replaceName();
 }
 
 function getCanvas(){
@@ -191,13 +207,11 @@ $("#styleLock").click(toggleStyleLock);
 $("#nameLock").click(toggleNameLock);
 
 var undoStatus = false;
-var isCustomType = false;
 
 function generate(){
   // Record previous content for undo & reset undo
-  window.lastStyle = document.getElementById("name").className;
-  window.lastBackground = document.getElementById("siteBackground").className;
-  window.lastName = document.getElementById("name").innerHTML;
+  window.lastStyleNum = styleNum;
+  window.lastName = currentName;
   $("#undo").css("transform", "");
   $("#undoLabel").html("(U)ndo");
   undoStatus = false;
@@ -206,70 +220,46 @@ function generate(){
     getStyle();
   }
 
-  if(styleLock == false && nameLock == true && isCustomType == true){
-    getCustomTypeStyle();
-    window.currentStyle = document.getElementById("name").className;
-    $("#name").addClass(tyle);
-  }
-
   if(nameLock == false){
-    //Remove any custom text
-
-    $("#name").removeClass("hidden");
-    $("#customType").addClass("hidden");
-    isCustomType = false;
-    currentStyle = document.getElementById("name").className;
-    $("#name").addClass(currentStyle);
-    $("#name").html("");
     getName();
   }
-
-  // Update URL
-  window.currentName = document.getElementById("name").innerHTML;
-  window.history.replaceState({}, "", "?" + currentName + "=" + styleNum);
+  updateURL();
 }
 
 function undo(){
-  if(lastStyle){
+  if(lastStyleNum){
     if(styleLock == false){
-      window.redoStyle = document.getElementById("name").className;
-      window.redoBackground = document.getElementById("siteBackground").className;
-      $("#name").removeClass();
-      $("#siteBackground").removeClass();
-      $("#name").addClass(lastStyle);
-      $("#siteBackground").addClass(lastBackground);
+      window.redoStyleNum = styleNum;
+      replaceStyle(lastStyleNum);
     }
     if(nameLock == false){
-      window.redoName = document.getElementById("name").innerHTML;
-      $("#name").html(lastName);
+      window.redoName = currentName;
+      replaceName(lastName);
     }
 
     $("#undo").css("transform", "scaleX(-1)");
     $("#undoLabel").html("(R)edo");
-
     undoStatus = true;
-    window.history.replaceState({}, "", "?" + lastName + "=" + lastStyle.replace("style",""));
+
+    updateURL();
   }
 }
 
 function redo(){
-  if(redoStyle || redoName){
+  if(redoStyleNum || redoName){
     if(styleLock == false){
-      $("#name").removeClass();
-      $("#siteBackground").removeClass();
-      $("#name").addClass(redoStyle);
-      $("#siteBackground").addClass(redoBackground);
+      replaceStyle(redoStyleNum);
     }
     if(nameLock == false){
-      $("#name").html(redoName);
+      replaceName(redoName);
     }
 
     $("#undo").css("transform", "");
     $("#undoLabel").html("(U)ndo");
-
     undoStatus = false;
+
+    updateURL();
   }
-  window.history.replaceState({}, "", "?" + redoName + "=" + redoStyle.replace("style",""));
 }
 
 function undoOrRedo(){
@@ -281,13 +271,13 @@ function undoOrRedo(){
   }
   window.clearInterval(countdownToFlash);
 }
-
 $("#undo").click(undoOrRedo);
 
 //Mobile Changes
 var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 if(isMobile){
   $("#name").html("Tap Anywhere to Begin");
+  $(".nameContainer").css("transform", "translate(-50%, -60%) scale(0.8)");
 }
 $("#siteBackground").click(function(){
   if(isMobile){
@@ -295,26 +285,16 @@ $("#siteBackground").click(function(){
   }
 });
 
-function beginWriting(){
-  currentStyle = document.getElementById("name").className;
-  $("#name").addClass("hidden");
-  $("#customType").removeClass();
-  $("#customType").addClass(currentStyle);
-  $("#customType").focus();
-}
-
 $("#button").click(generate);
 
 function downloadImage(){
   window.clearInterval(countdownToFlash);
-  var currentName = document.getElementById("name").innerHTML;
-  var currentStyleNum = document.getElementById("name").className.split("style")[1];
-  if(bannedStyles.includes(currentStyleNum) == false){
+  if(bannedStyles.includes(styleNum) == false){
     $("canvas").remove();
     getCanvas().then(function() {
       var okToDownload = confirm("Download Image?");
       if(okToDownload){
-        canvasToImage("canvas", currentName + currentStyleNum);
+        canvasToImage("canvas", currentName + styleNum);
       }
     });
   }
@@ -322,25 +302,7 @@ function downloadImage(){
     alert("Sorry, this style cannot be downloaded.");
   }
 }
-
 $("#download").click(downloadImage);
-
-//Custom typing
-// $(document).keydown(function(e){
-//   // console.log(e);
-//   if(isCustomType == false){
-//     if(e.keyCode == 16||65||66||67||68||69||70||71||72||73||74||75||76||77||78||79||80||81||82||83||84||85||86||87||88||89||90){
-//       beginWriting();
-//       isCustomType = true;
-//     }
-//   }
-// })
-// $(document).keydown(function(e){
-//   if(e.keyCode == 16||65||66||67||68||69||70||71||72||73||74||75||76||77||78||79||80||81||82||83||84||85||86||87||88||89||90){
-//     var customName = document.getElementById("customType").value
-//     window.history.replaceState({}, "", "?" + customName + "=" + styleNum);
-//   }
-// })
 
 $(document).keyup(function(e){
   if(e.keyCode == 32){
@@ -358,17 +320,11 @@ $(document).keyup(function(e){
   if(e.keyCode == 82){
     redo();
   }
-  // if(e.keyCode == 68){
-  //   downloadImage();
-  // }
 })
 
 //Get elements from URL
 var urlParts = window.location.search.split("?")[1];
-var nameFromURL = decodeURIComponent(urlParts.split("=")[0]);
-var styleFromURL = urlParts.split("=")[1];
-$("#name").removeClass();
-$("#siteBackground").removeClass();
-$("#name").addClass("style"+styleFromURL);
-$("#siteBackground").addClass("background"+styleFromURL);
-$("#name").html(nameFromURL);
+var currentName = decodeURIComponent(urlParts.split("=")[0]);
+var styleNum = urlParts.split("=")[1];
+replaceStyle();
+replaceName();
