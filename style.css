@@ -335,12 +335,8 @@ img{
     60% { color: blue; }
     75% { color: red; }
   }
-@font-face {
-  font-family: "comic-sans";
-  src: url("fonts/comic sans ms.ttf") format:("truetype");
-}
 .style25{
-  font-family: "comic-sans", "verdana";
+  font-family: "comic sans ms", "verdana", sans-serif;
   text-transform: lowercase;
   color: blue;
   animation-name: uglyColors;
