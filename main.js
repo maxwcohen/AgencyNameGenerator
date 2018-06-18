@@ -59,8 +59,8 @@ var noun = [
 ];
 
 var bannedStyles = [
-  "9", "18"];
-
+  "9", "18"
+];
 
 function replaceStyle(num){
   num = num || styleNum;
@@ -160,14 +160,6 @@ function getName(){
   replaceName();
 }
 
-function getCanvas(){
-  return html2canvas(document.getElementById("siteBackground"))
-    .then(function(canvas) {
-        document.body.appendChild(canvas);
-        document.getElementsByTagName("canvas")[0].setAttribute("id", "canvas");
-    });
-}
-
 //Flash options if they haven't been used
 function addFlash(){
   $(".optionsContainer").addClass("flash");
@@ -225,6 +217,7 @@ function generate(){
   }
   updateURL();
 }
+$("#button").click(generate);
 
 function undo(){
   if(lastStyleNum){
@@ -286,7 +279,13 @@ $("#siteBackground").click(function(){
   }
 });
 
-$("#button").click(generate);
+function getCanvas(){
+  return html2canvas(document.getElementById("siteBackground"))
+    .then(function(canvas) {
+        document.body.appendChild(canvas);
+        document.getElementsByTagName("canvas")[0].setAttribute("id", "canvas");
+    });
+}
 
 function downloadImage(){
   window.clearInterval(countdownToFlash);
