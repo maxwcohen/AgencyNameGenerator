@@ -86,7 +86,7 @@ function updateURL(name, num){
 }
 
 function getStyle(){
-  styleNum = Math.floor(Math.random()*19+1);
+  styleNum = Math.floor(Math.random()*25+1);
   replaceStyle();
 }
 
@@ -169,7 +169,6 @@ countdownToFlash;
 
 var styleLock = false;
 var nameLock = false;
-
 function toggleStyleLock(){
   if(styleLock == false){
     $("#styleLock").addClass("fullOpacity");
@@ -181,7 +180,6 @@ function toggleStyleLock(){
   }
   window.clearInterval(countdownToFlash);
 }
-
 function toggleNameLock(){
   if(nameLock == false){
     $("#nameLock").addClass("fullOpacity");
@@ -194,7 +192,6 @@ function toggleNameLock(){
   }
   window.clearInterval(countdownToFlash);
 }
-
 $("#styleLock").click(toggleStyleLock);
 $("#nameLock").click(toggleNameLock);
 
@@ -286,7 +283,6 @@ function getCanvas(){
         document.getElementsByTagName("canvas")[0].setAttribute("id", "canvas");
     });
 }
-
 function downloadImage(){
   window.clearInterval(countdownToFlash);
   if(bannedStyles.includes(styleNum) == false){
