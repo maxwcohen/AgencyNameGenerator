@@ -336,7 +336,7 @@ img{
     75% { color: red; }
   }
 .style25{
-  font-family: "comic sans ms", "verdana", sans-serif;
+  font-family: "Comic Sans MS", "comic sans ms", "verdana", sans-serif;
   text-transform: lowercase;
   color: blue;
   animation-name: uglyColors;
