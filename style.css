@@ -337,7 +337,7 @@ img{
   }
 @font-face {
   font-family: "comic-sans";
-  src: url("fonts/comic sans ms.ttf");
+  src: url("fonts/comic sans ms.ttf") format:("truetype");
 }
 .style25{
   font-family: "comic-sans";
