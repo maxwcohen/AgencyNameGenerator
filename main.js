@@ -278,6 +278,7 @@ var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 if(isMobile){
   $("#name").html("Tap Anywhere to Begin");
   $(".nameContainer").css("transform", "translate(-50%, -60%) scale(0.8)");
+  $(".optionsContainer").css("transform", "scale(0.9)")
 }
 $("#siteBackground").click(function(){
   if(isMobile){

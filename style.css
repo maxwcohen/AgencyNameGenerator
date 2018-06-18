@@ -47,6 +47,9 @@ canvas{
   box-shadow: 3px 3px;
   padding-top: 5px;
 }
+#button:focus{
+  outline: none;
+}
 
 input{
   background-color: rgba(0,0,0,0);
