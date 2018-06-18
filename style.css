@@ -340,7 +340,7 @@ img{
   src: url("fonts/comic sans ms.ttf") format:("truetype");
 }
 .style25{
-  font-family: "comic-sans";
+  font-family: "comic-sans", "verdana";
   text-transform: lowercase;
   color: blue;
   animation-name: uglyColors;
