@@ -62,20 +62,25 @@ var bannedStyles = [
   "9", "18"
 ];
 
+var nameJQ = $("#name");
+var nameJS = document.getElementById("name");
+var backgroundJQ = $("#siteBackground");
+var backgroundJS = document.getElementById("siteBackground");
+
 function replaceStyle(num){
   num = num || styleNum;
-  $("#name").removeClass();
-  $("#siteBackground").removeClass();
-  $("#name").addClass("style" + num);
-  $("#siteBackground").addClass("background" + num);
-  styleNum = document.getElementById("name").className.split("style")[1]
+  nameJQ.removeClass();
+  backgroundJQ.removeClass();
+  nameJQ.addClass("style" + num);
+  backgroundJQ.addClass("background" + num);
+  styleNum = nameJS.className.split("style")[1];
   console.log(styleNum);
 }
 
 function replaceName(name){
   name = name || currentName;
-  $("#name").html(name);
-  currentName = document.getElementById("name").innerHTML;
+  nameJQ.html(name);
+  currentName = nameJS.innerHTML;
   console.log(currentName);
 }
 
@@ -93,7 +98,7 @@ function getStyle(){
 function getLetter(){
   var letterIndex = Math.floor(Math.random()*letter.length);
   var letterValue = letter[letterIndex];
-  $("#name").append(letterValue);
+  nameJQ.append(letterValue);
 }
 
 function getAcronym(){
@@ -101,7 +106,7 @@ function getAcronym(){
   var coinFlip = Math.random();
   function slash(){
     if(coinFlip > 0.5){
-      $("#name").append("/");
+      nameJQ.append("/");
     }
   }
   getLetter();
@@ -120,44 +125,44 @@ function getAcronym(){
 function getAdjective(){
   var adjectiveIndex = Math.floor(Math.random()*adjective.length);
   var adjectiveValue = adjective[adjectiveIndex];
-  $("#name").append(adjectiveValue);
+  nameJQ.append(adjectiveValue);
 }
 
 function getNoun(){
   var nounIndex = Math.floor(Math.random()*noun.length);
   var nounValue = noun[nounIndex];
-  $("#name").append(nounValue);
+  nameJQ.append(nounValue);
 }
 
 function getWords(){
   var threeSidedCoin = Math.random();
-  if(threeSidedCoin > .67){
+  if(threeSidedCoin > 0.67){
     getAdjective();
     window.isTwoWords = false;
   }
-  if(threeSidedCoin < .33){
+  if(threeSidedCoin < 0.33){
     getNoun();
     window.isTwoWords = false;
   }
-  if(threeSidedCoin >= .33 && threeSidedCoin <= .67){
+  if(threeSidedCoin >= 0.33 && threeSidedCoin <= 0.67){
     getAdjective();
-    $("#name").append(" ");
+    nameJQ.append(" ");
     getNoun();
     window.isTwoWords = true;
   }
 }
 
 function getName(){
-  $("#name").html("");
+  nameJQ.html("");
   if(Math.random()>0.5){
     getAcronym();
   }
   else{
     getWords();
   }
-  currentName = document.getElementById("name").innerHTML;
+  currentName = nameJS.innerHTML;
   //Make all one string
-  replaceName();
+  nameJS.normalize();
 }
 
 //Flash options if they haven't been used
@@ -170,7 +175,7 @@ countdownToFlash;
 var styleLock = false;
 var nameLock = false;
 function toggleStyleLock(){
-  if(styleLock == false){
+  if(styleLock === false){
     $("#styleLock").addClass("fullOpacity");
     styleLock = true;
   }
@@ -181,7 +186,7 @@ function toggleStyleLock(){
   window.clearInterval(countdownToFlash);
 }
 function toggleNameLock(){
-  if(nameLock == false){
+  if(nameLock === false){
     $("#nameLock").addClass("fullOpacity");
     nameLock = true;
 
@@ -205,11 +210,11 @@ function generate(){
   $("#undoLabel").html("(U)ndo");
   undoStatus = false;
 
-  if(styleLock == false){
+  if(styleLock === false){
     getStyle();
   }
 
-  if(nameLock == false){
+  if(nameLock === false){
     getName();
   }
   updateURL();
@@ -218,11 +223,11 @@ $("#button").click(generate);
 
 function undo(){
   if(lastStyleNum){
-    if(styleLock == false){
+    if(styleLock === false){
       window.redoStyleNum = styleNum;
       replaceStyle(lastStyleNum);
     }
-    if(nameLock == false){
+    if(nameLock === false){
       window.redoName = currentName;
       replaceName(lastName);
     }
@@ -237,10 +242,10 @@ function undo(){
 
 function redo(){
   if(redoStyleNum || redoName){
-    if(styleLock == false){
+    if(styleLock === false){
       replaceStyle(redoStyleNum);
     }
-    if(nameLock == false){
+    if(nameLock === false){
       replaceName(redoName);
     }
 
@@ -253,7 +258,7 @@ function redo(){
 }
 
 function undoOrRedo(){
-  if(undoStatus == false){
+  if(undoStatus === false){
     undo();
   }
   else{
@@ -266,18 +271,18 @@ $("#undo").click(undoOrRedo);
 //Mobile Changes
 var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 if(isMobile){
-  $("#name").html("Tap Anywhere to Begin");
+  nameJQ.html("Tap Anywhere to Begin");
   $(".nameContainer").css("transform", "translate(-50%, -60%) scale(0.8)");
   $(".optionsContainer").css("transform", "scale(0.9)")
 }
-$("#siteBackground").click(function(){
+backgroundJQ.click(function(){
   if(isMobile){
     generate();
   }
 });
 
 function getCanvas(){
-  return html2canvas(document.getElementById("siteBackground"))
+  return html2canvas(backgroundJS)
     .then(function(canvas) {
         document.body.appendChild(canvas);
         document.getElementsByTagName("canvas")[0].setAttribute("id", "canvas");
@@ -285,7 +290,7 @@ function getCanvas(){
 }
 function downloadImage(){
   window.clearInterval(countdownToFlash);
-  if(bannedStyles.includes(styleNum) == false){
+  if(bannedStyles.includes(styleNum) === false){
     $("canvas").remove();
     getCanvas().then(function() {
       var okToDownload = confirm("Download Image?");
