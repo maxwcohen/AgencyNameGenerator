@@ -58,6 +58,11 @@ var noun = [
   "Step<wbr>mother"
 ];
 
+var surname = [
+  "Billingston",
+  "Abalone"
+]
+
 var bannedStyles = [
   "9", "18"
 ];
@@ -91,7 +96,7 @@ function updateURL(name, num){
 }
 
 function getStyle(){
-  styleNum = Math.floor(Math.random()*25+1);
+  styleNum = Math.floor(Math.random()*26+1);
   replaceStyle();
 }
 
@@ -152,9 +157,41 @@ function getWords(){
   }
 }
 
+// function getSurname(){
+//   var surnameIndex = Math.floor(Math.random()*surname.length);
+//   var surnameValue = surname[surnameIndex];
+//   nameJQ.append(surnameValue);
+// }
+//
+// function getSurnames(){
+//     var numSurname = Math.floor(Math.random()*3+2);
+//     console.log(numSurname);
+//     if (numSurname == 2) {
+//       getSurname();
+//       nameJQ.append(" & ");
+//       getSurname();
+//     }
+//     if(numSurname == 3){
+//       getSurname();
+//       nameJQ.append(", ");
+//       getSurname();
+//       nameJQ.append(" & ");
+//       getSurname();
+//     }
+//     if(numSurname == 4){
+//       getSurname();
+//       nameJQ.append(", ");
+//       getSurname();
+//       nameJQ.append(", ");
+//       getSurname();
+//       nameJQ.append(" & ");
+//       getSurname();
+//     }
+// }
+
 function getName(){
   nameJQ.html("");
-  if(Math.random()>0.5){
+  if(Math.random()<0.15){
     getAcronym();
   }
   else{
