@@ -24,7 +24,8 @@ var adjective = [
   "Big",
   "Fat",
   "Rough",
-  "Vanilla"
+  "Vanilla",
+  "Pineapple"
 ];
 
 var noun = [
@@ -55,7 +56,8 @@ var noun = [
   "Wax",
   "Thanks",
   "Luck",
-  "Step<wbr>mother"
+  "Step<wbr>mother",
+  "Pineapple"
 ];
 
 var surname = [
