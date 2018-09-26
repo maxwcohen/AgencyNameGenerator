@@ -16,7 +16,6 @@ var adjective = [
   "A",
   "Folding",
   "Young",
-  "Molecular",
   "Deep",
   "Daily",
   "Proud",
@@ -25,7 +24,23 @@ var adjective = [
   "Fat",
   "Rough",
   "Vanilla",
-  "Pineapple"
+  "Pineapple",
+  "Cuckoo",
+  "Fandango",
+  "Jumbo",
+  "Blue",
+  "Effervescent",
+  "Silly",
+  "Brick",
+  "Khaki",
+  "Lemon",
+  "Amber",
+  "Apricot",
+  "Salmon",
+  "Rusty",
+  "Indigo",
+  "Turquoise",
+  "Cloudy"
 ];
 
 var noun = [
@@ -57,7 +72,40 @@ var noun = [
   "Thanks",
   "Luck",
   "Step<wbr>mother",
-  "Pineapple"
+  "Pineapple",
+  "Avocado",
+  "Guru",
+  "Hooligan",
+  "Igloo",
+  "Juggernaut",
+  "Parabola",
+  "Ricochet",
+  "Thunder",
+  "Creep",
+  "Glory",
+  "Toad",
+  "Duck",
+  "Cod",
+  "Goat",
+  "Fudge",
+  "Bucket",
+  "Hog",
+  "Nugget",
+  "Zucchini",
+  "Apricot",
+  "Salmon",
+  "Lavender",
+  "Arm",
+  "Bone",
+  "Bucket",
+  "Abberation",
+  "Cheese",
+  "Island",
+  "Window",
+  "Umbrella",
+  "Toast",
+  "Radio",
+  "Dude"
 ];
 
 var surname = [
@@ -143,15 +191,15 @@ function getNoun(){
 
 function getWords(){
   var threeSidedCoin = Math.random();
-  if(threeSidedCoin > 0.67){
+  if(threeSidedCoin > 0.75){
     getAdjective();
     window.isTwoWords = false;
   }
-  if(threeSidedCoin < 0.33){
+  if(threeSidedCoin < 0.35){
     getNoun();
     window.isTwoWords = false;
   }
-  if(threeSidedCoin >= 0.33 && threeSidedCoin <= 0.67){
+  if(threeSidedCoin >= 0.35 && threeSidedCoin <= 0.75){
     getAdjective();
     nameJQ.append(" ");
     getNoun();
